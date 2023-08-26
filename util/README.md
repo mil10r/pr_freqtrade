@@ -2,5 +2,5 @@
 
 ## Publish docker images to ghcr.io
 ```commandline
-./util/publish_docker_multi.sh
+./util/publish_images_ghcr.sh
 ```

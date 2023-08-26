@@ -18,7 +18,7 @@ source .env
 
 check_command_success "source .env file"
 
-echo $CR_PAT | docker login ghcr.io -u mil10r --password-stdin
+echo $GHCR_TOKEN | docker login ghcr.io -u mil10r --password-stdin
 
 check_command_success "docker login to ghcr.io"
 

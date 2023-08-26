@@ -10,7 +10,7 @@ check_command_success() {
     fi
 }
 
-source util/.env
+source .env
 echo $GHCR_TOKEN | docker login ghcr.io -u mil10r --password-stdin
 
 check_command_success "login to ghcr.io"
@@ -22,10 +22,10 @@ TAG_PLOT=plot
 TAG_FREQAI=freqai
 TAG_FREQAI_RL=rl
 
-docker build -t ${IMAGE_NAME}:${TAG} -t ${GHCR_IMAGE_NAME}:${TAG} . &&
-docker build --build-arg sourceimage=${IMAGE_NAME} --build-arg sourcetag=${TAG} -t ${IMAGE_NAME}:${TAG_PLOT} -f docker/Dockerfile.plot . &&
-docker build --build-arg sourceimage=${IMAGE_NAME} --build-arg sourcetag=${TAG} -t ${IMAGE_NAME}:${TAG_FREQAI} -f docker/Dockerfile.freqai . &&
-docker build --build-arg sourceimage=${IMAGE_NAME} --build-arg sourcetag=${TAG_FREQAI} -t ${IMAGE_NAME}:${TAG_FREQAI_RL} -f docker/Dockerfile.freqai_rl .
+docker build -t ${IMAGE_NAME}:${TAG} -t ${GHCR_IMAGE_NAME}:${TAG} -f ../Dockerfile &&
+docker build --build-arg sourceimage=${IMAGE_NAME} --build-arg sourcetag=${TAG} -t ${IMAGE_NAME}:${TAG_PLOT} -f ../docker/Dockerfile.plot . &&
+docker build --build-arg sourceimage=${IMAGE_NAME} --build-arg sourcetag=${TAG} -t ${IMAGE_NAME}:${TAG_FREQAI} -f ../docker/Dockerfile.freqai . &&
+docker build --build-arg sourceimage=${IMAGE_NAME} --build-arg sourcetag=${TAG_FREQAI} -t ${IMAGE_NAME}:${TAG_FREQAI_RL} -f ../docker/Dockerfile.freqai_rl .
 
 check_command_success "build all docker images"
 

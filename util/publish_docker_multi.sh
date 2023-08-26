@@ -10,7 +10,7 @@ check_command_success() {
     fi
 }
 
-source .env
+source util/.env
 echo $GHCR_TOKEN | docker login ghcr.io -u mil10r --password-stdin
 
 check_command_success "login to ghcr.io"
